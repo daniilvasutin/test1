@@ -1,9 +1,9 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="WebAppBuilder" default="deploy" basedir="../../../" >
     <property file="src/main/resource/build.properties" />
-    <ivy:settings file="src/main/resource/ivysetting.xml" />
+    <ivy:settings file="${src.main.dir}/resource/ivysetting.xml" />
 
     <path id="classpath">
-        <fileset dir="src/main/webapp/WEB-INF/lib/hibernate" includes="*.jar"/>
+        <fileset dir="${src.main.dir}/${lib.dir}/hibernate" includes="*.jar"/>
     </path>
 
     <target name="bootstrap" description="Used to install the ivy task jar">
@@ -13,7 +13,7 @@
     </target>
 
     <target name="resolve">
-        <ivy:retrieve file="src/main/resource/ivy.xml" />
+        <ivy:retrieve file="${src.main.dir}/resource/ivy.xml" />
     </target>
 
     <target name="clean">
@@ -39,7 +39,7 @@
             <fileset dir="${src.main.dir}/webapp"/>
         </copy>
         <move todir="build/WEB-INF/lib">
-            <fileset dir="build/WEB-INF/lib/hibernate" includes="*.jar"/>
+            <fileset dir="${build.dir}/WEB-INF/lib/hibernate" includes="*.jar"/>
         </move>
         <delete dir="build/WEB-INF/lib/hibernate"/>
         <copy todir="${build.dir}/WEB-INF/classes" file="${src.main.dir}/resource/hibernate.cfg.xml"/>
